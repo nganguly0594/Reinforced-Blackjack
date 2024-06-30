@@ -1,6 +1,7 @@
 # Reinforced Blackjack
 
 ![AI-generated blackjack card with armor](raw/AI-Blackjack.jpeg)
+*Created using DeepAI Image Generator with the prompt: "A playing card with armor and a spear."*
 
 This project is a comprehensive Blackjack game simulation and analysis tool built with Python. It includes basic and advanced strategy simulations and the training of a reinforcement learning agent to find optimal Blackjack strategies.
 
