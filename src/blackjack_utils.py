@@ -123,6 +123,15 @@ def dealer_simulation(hand, deck):
         deck.deal(hand)
 
 
+# Making easier hand splitting method
+def split_hands(hands, deck):
+    hands.append(Hand())  # Add a new hand for splitting
+    hands[0].split(hands[1])  # Split the cards between hands
+
+    for hand in hands:
+        deck.deal(hand)
+
+
 # Blackjack Configuration
 # - Cards reshuffled after 25% deck penetration
 # - 1:1 payout
@@ -132,14 +141,13 @@ def dealer_simulation(hand, deck):
 # - No double down after split
 # - No surrender
 
+
 # Customizable Configuration
 # - Player strategy
-# - Initial money (Default: 2000)
+# - Initial money (Default: 1000)
 # - Bet amount (Default: 100)
 # - Max rounds played (Default: 1)
 # - Number of decks used for the shoe (Default: 6)
-
-
 def simulation(strategy, initial_money=1000, bet_amount=100, max_rounds=1, decks=6):
     rounds_played = 0
     current_money = initial_money
@@ -176,7 +184,7 @@ def simulation(strategy, initial_money=1000, bet_amount=100, max_rounds=1, decks
 
         current_bet = bet_amount * (int(double) + 1)  # Double the bet if doubled down
 
-        for i, hand in enumerate(player_hands):
+        for hand in player_hands:
             if hand.value() > 21:
                 current_money -= current_bet
             elif dealer_hand.value() > 21 or dealer_hand.value() < hand.value():
