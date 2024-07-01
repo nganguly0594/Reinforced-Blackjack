@@ -5,7 +5,7 @@ blackjack play against the dealer with customizable configurations
 
 import os
 
-from blackjack_utils import Decks, Hand, dealer_simulation
+from blackjack_utils import Decks, Hand, dealer_simulation, split_hands
 
 
 def player_simulation(hands, dealer_upcard, deck, can_bet_more, rounds):
@@ -64,12 +64,9 @@ def player_simulation(hands, dealer_upcard, deck, can_bet_more, rounds):
                 print("Invalid input, try again!", "\n")
 
     if split:
-        hands.append(Hand())  # Add a new hand for splitting
-        hands[0].split(hands[1])  # Split the cards between hands
+        split_hands(hands, deck)
 
         for i, hand in enumerate(hands):
-            deck.deal(hand)
-
             stand = False
 
             while hand.value() < 21 and not stand:
@@ -162,12 +159,12 @@ def play_interactive_game():
 
         current_bet = bet_amount * (int(double) + 1)  # Double the bet if doubled down
 
-        print("Dealer's turn complete!")
+        print("Dealer's turn complete!\n")
         print("The dealer's", dealer_hand, "\n")
 
         for i, hand in enumerate(player_hands):
             if len(player_hands) == 2:
-                print(f"Hand {i}:")
+                print(f"Hand {i + 1}:")
 
             if hand.value() > 21:
                 print("Bust!", "\n")
