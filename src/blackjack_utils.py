@@ -1,7 +1,7 @@
 """
 This is the main blackjack setup module containing OOP based
 implementations of card, hand, and deck classes, as well as
-functions to define the game logic and start a simulation run
+functions to define the game logic and start a simulation run.
 """
 
 import random
@@ -140,8 +140,6 @@ def split_hands(hands, deck):
 # - No resplits
 # - No double down after split
 # - No surrender
-
-
 # Customizable Configuration
 # - Player strategy
 # - Initial money (Default: 1000)

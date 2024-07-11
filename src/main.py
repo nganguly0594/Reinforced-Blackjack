@@ -1,6 +1,6 @@
 """
-This is the interactive play module, which will allow users to simulate
-blackjack play against the dealer with customizable configurations
+This is the interactive play module, which allows users to simulate
+blackjack play against the dealer with customizable configurations.
 """
 
 import os
