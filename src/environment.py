@@ -1,3 +1,10 @@
+"""
+This is the blackjack gym environment setup, loosely based
+off of the same OOP based setup in blackjack_utils. It defines
+the necessary functions (__init__, reset, step) in order to
+inherit a Gymnasium environment and train an RL agent.
+"""
+
 import gymnasium as gym
 import numpy as np
 from gymnasium import spaces
@@ -7,7 +14,9 @@ from blackjack_utils import Decks, Hand, dealer_simulation
 
 # Environment for only hitting, standing, and doubling down
 class BlackjackEnv(gym.Env):
-    def __init__(self):
+    def __init__(self, higher_payout=False):
+        # Initializing whether 3:2 payout or 1:1 payout on blackjacks
+        self.higher_payout = higher_payout
         # 3 possible actions total
         self.action_space = spaces.Discrete(3)
         # 25 hands, 10 dealer cards, explained in notebook 3
@@ -105,6 +114,8 @@ class BlackjackEnv(gym.Env):
                 or self.dealer_hand.value() < self.player_hand.value()
             ):
                 reward = 1 * self.multiplier  # Payout for win
+                if self.higher_payout and self.player_hand.value() == 21:
+                    reward *= 1.5  # 3:2 payout on blackjacks
             elif self.dealer_hand.value() > self.player_hand.value():
                 reward = -1 * self.multiplier
             # Else tie, so no rewards provided
